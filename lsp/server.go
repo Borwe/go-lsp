@@ -11,13 +11,13 @@ import (
 
 type Server struct {
 	Methods
-	rpcServer *jsonrpc.Server
+	RpcServer *jsonrpc.Server
 }
 
 func NewServer(opt *Options) *Server {
 	s := &Server{}
 	s.Opt = *opt
-	s.rpcServer = jsonrpc.NewServer()
+	s.RpcServer = jsonrpc.NewServer()
 	return s
 }
 
@@ -25,7 +25,7 @@ func (s *Server) Run() {
 	mtds := s.GetMethods()
 	for _, m := range mtds {
 		if m != nil {
-			s.rpcServer.RegisterMethod(*m)
+			s.RpcServer.RegisterMethod(*m)
 		}
 	}
 
@@ -48,12 +48,12 @@ func (s *Server) run() {
 			if err != nil {
 				panic(err)
 			}
-			go s.rpcServer.ConnComeIn(conn)
+			go s.RpcServer.ConnComeIn(conn)
 		}
 	} else {
 		logs.Println("use stdio mode.")
 		// use stdio mode
-		s.rpcServer.ConnComeIn(NewStdio())
+		s.RpcServer.ConnComeIn(NewStdio())
 	}
 }
 
