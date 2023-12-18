@@ -12,7 +12,7 @@ type MethodInfo struct {
 }
 
 type Server struct {
-	session     map[int]*Session
+	Session     map[int]*Session
 	nowId       int
 	methods     map[string]MethodInfo
 	sessionLock sync.Mutex
@@ -20,7 +20,7 @@ type Server struct {
 
 func NewServer() *Server {
 	s := &Server{}
-	s.session = make(map[int]*Session)
+	s.Session = make(map[int]*Session)
 	s.methods = make(map[string]MethodInfo)
 
 	// Register Builtin
@@ -41,7 +41,7 @@ func (s *Server) ConnComeIn(conn ReaderWriter) {
 func (s *Server) removeSession(id int) {
 	s.sessionLock.Lock()
 	defer s.sessionLock.Unlock()
-	delete(s.session, id)
+	delete(s.Session, id)
 }
 
 func (s *Server) newSession(conn ReaderWriter) *Session {
@@ -50,6 +50,6 @@ func (s *Server) newSession(conn ReaderWriter) *Session {
 	id := s.nowId
 	s.nowId += 1
 	session := newSession(id, s, conn)
-	s.session[id] = session
+	s.Session[id] = session
 	return session
 }

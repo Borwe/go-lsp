@@ -235,7 +235,7 @@ func (s *Session) handlerRequest(req RequestMessage) error {
 	return nil
 }
 
-func (s *Session) write(resp ResponseMessage) error {
+func (s *Session) Write(resp ResponseMessage) error {
 	s.writeLock.Lock()
 	defer s.writeLock.Unlock()
 	res, err := jsoniter.Marshal(resp)
@@ -284,7 +284,7 @@ func (s *Session) handlerResponse(id interface{}, result interface{}, err error)
 		}
 	}
 	resp.Result = result
-	return s.write(resp)
+	return s.Write(resp)
 }
 
 func (s *Session) handlerError(err error) {
