@@ -10,9 +10,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/TobiasYin/go-lsp/logs"
-	"github.com/TobiasYin/go-lsp/lsp"
-	"github.com/TobiasYin/go-lsp/lsp/defines"
+	"github.com/Borwe/go-lsp/logs"
+	"github.com/Borwe/go-lsp/lsp"
+	"github.com/Borwe/go-lsp/lsp/defines"
 )
 
 func strPtr(str string) *string {
